@@ -7,7 +7,6 @@
   --table-header-bg: #00468b;
   --table-row-even: #ffffff;
   --table-row-odd: #f0f4f8;
-  --max-width: 1200px;
 }
 
 body {
@@ -19,7 +18,7 @@ body {
 }
 
 .container {
-  max-width: var(--max-width);
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -35,6 +34,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 20px;
 }
 
 .site-nav {
@@ -61,7 +61,7 @@ body {
 }
 
 main {
-  padding: 40px 0;
+  padding: 40px 20px;
 }
 
 a {
@@ -81,7 +81,7 @@ table {
 }
 
 th, td {
-  padding: 12px;
+  padding: 12px 20px;
   text-align: left;
   border: 1px solid var(--border-color);
   word-wrap: break-word;
@@ -137,6 +137,7 @@ input[type="text"], textarea {
 .table-container {
   width: 100%;
   overflow-x: auto;
+  padding: 0 20px;
 }
 
 @media (max-width: 768px) {

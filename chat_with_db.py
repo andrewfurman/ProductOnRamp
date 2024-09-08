@@ -23,7 +23,12 @@ DATABASE_URL = f"postgresql://{PGUSER}:{PGPASSWORD}@{PGHOST}:{PGPORT}/{PGDATABAS
 engine = create_engine(DATABASE_URL)
 
 # Set up the LangChain LLM
-llm = OpenAI(temperature=0.7)
+# llm = OpenAI(temperature=0.7)
+llm = ChatOpenAI(
+    model="gpt-4o-mini",  # Specify GPT-4o-mini model
+    temperature=0.7  # Adjust the temperature as needed
+)
+
 
 def get_db_schema():
     """

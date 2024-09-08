@@ -1,0 +1,83 @@
+{% extends "header.html" %}
+
+{% block content %}
+<h2>Detailed Product List</h2>
+<div class="table-container">
+    <table class="detailed-product-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>URL</th>
+                <th>Line of Business</th>
+                <th>Plan Name</th>
+                <th>Plan Year</th>
+                <th>Plan Status</th>
+                <th>Plan Type</th>
+                <th>Plan Design</th>
+                <th>Metal Level</th>
+                <th>Coverage Type</th>
+                <th>Funding Arrangement</th>
+                <th>Group Size</th>
+                <th>Network Type</th>
+                <th>Effective Date</th>
+                <th>End Date</th>
+                <th>Provider Network Link</th>
+                <th>Provider Network Phone</th>
+                <th>Plan Marketing Name</th>
+                <th>Market Segment</th>
+                <th>HSA Eligible</th>
+                <th>Deductible Combined/Separate</th>
+                <th>Specialist Referral Required</th>
+                <th>Grandfathered Plan</th>
+                <th>In-Network Individual Deductible</th>
+                <th>In-Network Family Deductible</th>
+                <th>Out-of-Network Individual Deductible</th>
+                <th>Out-of-Network Family Deductible</th>
+                <th>In-Network Individual Out-of-Pocket Limit</th>
+                <th>In-Network Family Out-of-Pocket Limit</th>
+                <th>Out-of-Network Individual Out-of-Pocket Limit</th>
+                <th>Out-of-Network Family Out-of-Pocket Limit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td><a href="{{ product.url }}" target="_blank">Link</a></td>
+                <td>{{ product.line_of_business }}</td>
+                <td>{{ product.plan_name }}</td>
+                <td>{{ product.plan_year }}</td>
+                <td>{{ product.plan_status }}</td>
+                <td>{{ product.plan_type }}</td>
+                <td>{{ product.plan_design }}</td>
+                <td>{{ product.metal_level }}</td>
+                <td>{{ product.coverage_type }}</td>
+                <td>{{ product.funding_arrangement }}</td>
+                <td>{{ product.group_size }}</td>
+                <td>{{ product.network_type }}</td>
+                <td>{{ product.effective_date }}</td>
+                <td>{{ product.end_date }}</td>
+                <td><a href="{{ product.provider_network_link }}" target="_blank">Link</a></td>
+                <td>{{ product.provider_network_phone }}</td>
+                <td>{{ product.plan_marketing_name }}</td>
+                <td>{{ product.market_segment }}</td>
+                <td>{{ 'Yes' if product.is_hsa_eligible else 'No' }}</td>
+                <td>{{ product.deductible_combined_separate }}</td>
+                <td>{{ 'Yes' if product.specialist_referral_required else 'No' }}</td>
+                <td>{{ 'Yes' if product.grandfathered_plan else 'No' }}</td>
+                <td>{{ product.in_network_individual_deductible }}</td>
+                <td>{{ product.in_network_family_deductible }}</td>
+                <td>{{ product.out_of_network_individual_deductible }}</td>
+                <td>{{ product.out_of_network_family_deductible }}</td>
+                <td>{{ product.in_network_individual_oop_limit }}</td>
+                <td>{{ product.in_network_family_oop_limit }}</td>
+                <td>{{ product.out_of_network_individual_oop_limit }}</td>
+                <td>{{ product.out_of_network_family_oop_limit }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

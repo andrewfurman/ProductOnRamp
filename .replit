@@ -1,0 +1,16 @@
+run = ["sh", "-c", "gunicorn --bind 0.0.0.0:${PORT:-5000} --timeout 3600 main:app"]
+entrypoint = "main.py"
+modules = ["python-3.11"]
+
+hidden = [".pythonlibs"]
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "gunicorn --bind 0.0.0.0:${PORT:-5000} --timeout 3600 main:app"]
+deploymentTarget = "cloudrun"
+
+[[ports]]
+localPort = 5000
+externalPort = 80

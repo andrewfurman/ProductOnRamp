@@ -1,0 +1,32 @@
+{% extends "header.html" %}
+
+{% block content %}
+<h3>Product List</h3>
+<table data-page="product-list">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>SBC</th>
+            <th>Line of Business</th>
+            <th>Summary of Benefits (Preview)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td><a href="{{ url_for('product_detail', product_id=product.id) }}">{{ product.name }}</a></td>
+            <td><a href="{{ product.url }}" target="_blank">🔗Link to SBC</a></td>
+            <td>{{ product.line_of_business }}</td>
+            <td>{{ product.summary_preview }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Add Products</h3>
+<form action="{{ url_for('add_products') }}" method="post" id="addProductsForm">
+    <textarea name="urls" rows="5" placeholder="Enter URLs, one per line or comma-separated"></textarea>
+    <br>
+    <button type="submit" class="btn btn-primary" data-original-text="Add Products">Add Products</button>
+</form>
+{% endblock %}

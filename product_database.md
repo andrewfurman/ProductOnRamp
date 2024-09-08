@@ -1,0 +1,38 @@
+column_name	data_type
+in_network_family_oop_limit	numeric
+out_of_network_individual_oop_limit	numeric
+group_size	integer
+out_of_network_family_oop_limit	numeric
+effective_date	date
+end_date	date
+employer_contribution	numeric
+actuarial_value	numeric
+in_network_individual_deductible	numeric
+plan_year	integer
+in_network_family_deductible	numeric
+out_of_network_individual_deductible	numeric
+out_of_network_family_deductible	numeric
+is_hsa_eligible	boolean
+in_network_individual_oop_limit	numeric
+specialist_referral_required	boolean
+grandfathered_plan	boolean
+id	integer
+deductible_combined_separate	character varying
+coverage_summary	text
+name	text
+url	text
+summary_of_benefits	text
+line_of_business	text
+plan_name	character varying
+plan_status	character varying
+plan_type	character varying
+plan_design	character varying
+metal_level	character varying
+coverage_type	character varying
+funding_arrangement	character varying
+network_type	character varying
+distribution_channels	character varying
+provider_network_link	character varying
+provider_network_phone	text
+plan_marketing_name	character varying
+market_segment	character varying

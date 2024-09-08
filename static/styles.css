@@ -1,0 +1,160 @@
+:root {
+  --primary-color: #00468b;
+  --background-color: #f5f5f5;
+  --text-color: #333;
+  --border-color: #ddd;
+  --danger-color: #ff0000;
+  --table-header-bg: #00468b;
+  --table-row-even: #ffffff;
+  --table-row-odd: #f0f4f8;
+  --max-width: 1200px;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header Styles */
+.site-header {
+  background-color: var(--primary-color);
+  padding: 15px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.nav-link:hover {
+  opacity: 0.8;
+}
+
+.site-title {
+  color: #ffffff;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+main {
+  padding: 40px 0;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid var(--border-color);
+  word-wrap: break-word;
+}
+
+th {
+  background-color: var(--table-header-bg);
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+tr:nth-child(even) {
+  background-color: var(--table-row-even);
+}
+
+tr:nth-child(odd) {
+  background-color: var(--table-row-odd);
+}
+
+.btn {
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #ff6666;
+}
+
+form {
+  margin-top: 20px;
+}
+
+input[type="text"], textarea {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-nav {
+    margin-top: 10px;
+  }
+
+  .site-title {
+    font-size: 20px;
+  }
+}
+
+.btn-generating {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

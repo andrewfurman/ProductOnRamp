@@ -1,0 +1,203 @@
+{% extends "header.html" %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h2>Product Summary Attributes</h2>
+    <form action="{{ url_for('generate_summary', product_id=product.id) }}" method="post">
+        <button type="submit" class="btn btn-primary">✨ Generate Plan Summary ✨</button>
+    </form>
+</div>
+<table data-page="product-detail">
+    <thead>
+        <tr>
+            <th>Data Type</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Name</td>
+            <td>{{ product.name }}</td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td><a href="{{ product.url }}" target="_blank">{{ product.url }}</a></td>
+        </tr>
+        <tr>
+            <td>Line of Business</td>
+            <td>{{ product.line_of_business }}</td>
+        </tr>
+        <tr>
+            <td>Coverage Summary</td>
+            <td id="coverage-summary-content">{{ product.coverage_summary or 'No coverage summary available' }}</td>
+        </tr>
+    </tbody>
+</table>
+<form action="{{ url_for('delete_product', product_id=product.id) }}" method="post" style="margin-top: 20px;">
+    <input type="submit" value="Delete Product" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this product?');">
+</form>
+
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h2>Product Detailed Attributes</h2>
+    <form action="{{ url_for('generate_detailed_attributes', product_id=product.id) }}" method="post">
+        <button type="submit" class="btn btn-primary">✨ Generate Product Detail Attributes ✨</button>
+    </form>
+</div>
+
+<h3>Deductibles</h3>
+<table data-page="product-detail">
+    <thead>
+        <tr>
+            <th>Data Type</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>In-Network Individual Deductible</td>
+            <td>{{ product.in_network_individual_deductible or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>In-Network Family Deductible</td>
+            <td>{{ product.in_network_family_deductible or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>Out-of-Network Individual Deductible</td>
+            <td>{{ product.out_of_network_individual_deductible or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>Out-of-Network Family Deductible</td>
+            <td>{{ product.out_of_network_family_deductible or 'None' }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Out-of-Pocket Maximums</h3>
+<table data-page="product-detail">
+    <thead>
+        <tr>
+            <th>Data Type</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>In-Network Individual Out-of-Pocket Limit</td>
+            <td>{{ product.in_network_individual_oop_limit or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>In-Network Family Out-of-Pocket Limit</td>
+            <td>{{ product.in_network_family_oop_limit or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>Out-of-Network Individual Out-of-Pocket Limit</td>
+            <td>{{ product.out_of_network_individual_oop_limit or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>Out-of-Network Family Out-of-Pocket Limit</td>
+            <td>{{ product.out_of_network_family_oop_limit or 'None' }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Other Product Details</h3>
+<table data-page="product-detail">
+    <thead>
+        <tr>
+            <th>Data Type</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Plan Name</td>
+            <td>{{ product.plan_name or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>Plan Year</td>
+            <td>{{ product.plan_year or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>Plan Status</td>
+            <td>{{ product.plan_status or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>Plan Type</td>
+            <td>{{ product.plan_type or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>Plan Design</td>
+            <td>{{ product.plan_design or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>Metal Level</td>
+            <td>{{ product.metal_level or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>Coverage Type</td>
+            <td>{{ product.coverage_type or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>Funding Arrangement</td>
+            <td>{{ product.funding_arrangement or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>Group Size</td>
+            <td>{{ product.group_size or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>Network Type</td>
+            <td>{{ product.network_type or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>Effective Date</td>
+            <td>{{ product.effective_date or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>End Date</td>
+            <td>{{ product.end_date or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>Provider Network Link</td>
+            <td>{% if product.provider_network_link %}<a href="{{ product.provider_network_link }}" target="_blank">{{ product.provider_network_link }}</a>{% else %}None{% endif %}</td>
+        </tr>
+        <tr>
+            <td>Provider Network Phone</td>
+            <td>{{ product.provider_network_phone or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>Plan Marketing Name</td>
+            <td>{{ product.plan_marketing_name or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>Market Segment</td>
+            <td>{{ product.market_segment or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>HSA Eligible</td>
+            <td>{% if product.is_hsa_eligible is not none %}{{ 'Yes' if product.is_hsa_eligible else 'No' }}{% else %}None{% endif %}</td>
+        </tr>
+        <tr>
+            <td>Deductible Combined/Separate</td>
+            <td>{{ product.deductible_combined_separate or 'None' }}</td>
+        </tr>
+        <tr>
+            <td>Specialist Referral Required</td>
+            <td>{% if product.specialist_referral_required is not none %}{{ 'Yes' if product.specialist_referral_required else 'No' }}{% else %}None{% endif %}</td>
+        </tr>
+        <tr>
+            <td>Grandfathered Plan</td>
+            <td>{% if product.grandfathered_plan is not none %}{{ 'Yes' if product.grandfathered_plan else 'No' }}{% else %}None{% endif %}</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Summary of Benefits</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>{{ product.summary_of_benefits }}</td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

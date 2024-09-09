@@ -27,7 +27,7 @@ def get_product_with_retry(session, product_id, max_retries=3, retry_delay=1):
             else:
                 raise e
 
-def truncate_summary(summary, lines=5):
+def truncate_summary(summary, lines=15):
     if summary:
         return '\n'.join(summary.split('\n')[:lines])
     return ''
@@ -38,7 +38,7 @@ def products():
     try:
         products = session.query(Product).all()
         for product in products:
-            product.summary_preview = truncate_summary(product.summary_of_benefits)
+            product.coverage_summary_preview = truncate_summary(product.coverage_summary)
         return render_template('products.html', products=products)
     except OperationalError:
         return render_template('products.html', products=[])

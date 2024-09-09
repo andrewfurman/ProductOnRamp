@@ -1,9 +1,10 @@
 import os
 import openai
-from langchain_openai import OpenAI
+from langchain_openai import ChatOpenAI  # Updated import for ChatOpenAI
 from sqlalchemy import create_engine, text, inspect
 import argparse
 from tabulate import tabulate  # For pretty-printing the results
+import re
 
 # Fetch database credentials and OpenAI API key from environment variables
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -23,28 +24,27 @@ DATABASE_URL = f"postgresql://{PGUSER}:{PGPASSWORD}@{PGHOST}:{PGPORT}/{PGDATABAS
 engine = create_engine(DATABASE_URL)
 
 # Set up the LangChain LLM
-# llm = OpenAI(temperature=0.7)
 llm = ChatOpenAI(
-    model="gpt-4o-mini",  # Specify GPT-4o-mini model
+    model_name="gpt-4o-mini",  # Correct parameter for the model
     temperature=0.7  # Adjust the temperature as needed
 )
 
-
 def get_db_schema():
     """
-    Function to retrieve the schema (tables and columns) from the database.
+    Function to retrieve the columns from the 'product' table in the database.
     """
     inspector = inspect(engine)
     schema_info = {}
 
-    # Get all table names
-    tables = inspector.get_table_names()
-
-    for table in tables:
-        # Get columns for each table
-        columns = inspector.get_columns(table)
+    # Check if the 'product' table exists
+    if 'product' in inspector.get_table_names():
+        # Get columns for the 'product' table
+        columns = inspector.get_columns('product')
         column_names = [column['name'] for column in columns]
-        schema_info[table] = column_names
+        schema_info['product'] = column_names
+    else:
+        print("Error: The 'product' table does not exist in the database.")
+        return None
 
     return schema_info
 
@@ -93,6 +93,16 @@ def format_output(results):
     # Display the results in a pretty table
     print(tabulate(results_list, headers="keys", tablefmt="grid"))
 
+def extract_sql_query(response_content):
+    """
+    Extract the SQL query from the response content.
+    """
+    # Use a regex to extract content between the SQL block (` ```sql ` and ` ``` `)
+    match = re.search(r'```sql(.*?)```', response_content, re.DOTALL)
+    if match:
+        return match.group(1).strip()
+    return None
+
 def chat_with_data(question: str):
     """
     Function that uses LangChain to chat with the database.
@@ -105,8 +115,14 @@ def chat_with_data(question: str):
     prompt = generate_prompt(question, schema_info)
 
     # Generate the SQL query using the language model
-    response = llm.invoke(prompt)  # Use invoke() based on the latest deprecation warning
-    sql_query = response.strip()  # Assuming the response is a string
+    response = llm.invoke(prompt)  # Invoke the LLM to get a response
+
+    # Access the content from the AIMessage object
+    sql_query = extract_sql_query(response.content)
+
+    if not sql_query:
+        print("Error: No valid SQL query found in the response.")
+        return
 
     # Print the generated SQL query for debugging
     print(f"Generated SQL Query:\n{sql_query}\n")

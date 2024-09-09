@@ -8,7 +8,7 @@
             <th>Name</th>
             <th>SBC</th>
             <th>Line of Business</th>
-            <th>Summary of Benefits (Preview)</th>
+            <th>Coverage Summary</th>
         </tr>
     </thead>
     <tbody>
@@ -17,7 +17,7 @@
             <td><a href="{{ url_for('product_detail', product_id=product.id) }}">{{ product.name }}</a></td>
             <td><a href="{{ product.url }}" target="_blank">🔗Link to SBC</a></td>
             <td>{{ product.line_of_business }}</td>
-            <td>{{ product.summary_preview }}</td>
+            <td>{{ product.coverage_summary_preview }}</td>
         </tr>
         {% endfor %}
     </tbody>

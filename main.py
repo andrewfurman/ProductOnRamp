@@ -27,7 +27,7 @@ def get_product_with_retry(session, product_id, max_retries=3, retry_delay=1):
             else:
                 raise e
 
-def truncate_summary(summary, lines=15):
+def truncate_summary(summary, lines=7):
     if summary:
         return '\n'.join(summary.split('\n')[:lines])
     return ''

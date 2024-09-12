@@ -1,0 +1,25 @@
+{% extends "header.html" %}
+
+{% block content %}
+    <h3>📊 Key Statistics on Products Profiled</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Line of Business</th>
+                <th>Number of Products</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for line_of_business, count in stats %}
+            <tr>
+                <td>{{ line_of_business or 'Unspecified' }}</td>
+                <td>{{ count }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>{{ total_products }}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

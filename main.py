@@ -8,6 +8,7 @@ import time
 from extract_plan_info import process_and_save_pdf_content
 from summarize_gpt import summarize_plan_gpt
 from detailed_attributes_gpt import extract_product_details
+from sqlalchemy import func
 
 app = Flask(__name__)
 engine = create_engine(os.environ['DATABASE_URL'])
@@ -172,6 +173,22 @@ def extract_all():
         return f"Processed {processed_count} products with null Summary of Benefits.", 200
     except Exception as e:
         return f"An error occurred: {str(e)}", 500
+    finally:
+        session.close()
+
+@app.route('/stats')
+def stats():
+    session = get_db_session()
+    try:
+        # Query to count products by line of business
+        stats = session.query(Product.line_of_business, func.count(Product.id)).group_by(Product.line_of_business).all()
+
+        # Calculate total number of products
+        total_products = sum(count for _, count in stats)
+
+        return render_template('stats.html', stats=stats, total_products=total_products)
+    except OperationalError:
+        return render_template('stats.html', stats=[], total_products=0)
     finally:
         session.close()
 
